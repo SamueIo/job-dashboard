@@ -1,0 +1,365 @@
+.fc {
+    --fc-border-color: rgba(255,255,255,0.05);
+
+    color: white;
+
+    font-family: Inter, sans-serif;
+}
+
+/*
+|--------------------------------------------------------------------------
+| TOOLBAR
+|--------------------------------------------------------------------------
+*/
+
+.fc .fc-toolbar.fc-header-toolbar {
+    margin-bottom: 18px !important;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.fc-toolbar-title {
+    font-size: 24px !important;
+
+    font-weight: 700 !important;
+
+    color: #fff;
+
+    letter-spacing: -0.03em;
+}
+
+/*
+|--------------------------------------------------------------------------
+| BUTTONS
+|--------------------------------------------------------------------------
+*/
+
+.fc-button {
+    height: 42px !important;
+
+    padding: 0 16px !important;
+
+    border-radius: 12px !important;
+
+    border: 1px solid rgba(255,255,255,0.06) !important;
+
+    background: rgba(255,255,255,0.03) !important;
+
+    color: white !important;
+
+    font-weight: 500 !important;
+
+    font-size: 14px !important;
+
+    box-shadow: none !important;
+
+    transition: .2s ease !important;
+}
+
+.fc-button:hover {
+    background: rgba(255,255,255,0.06) !important;
+}
+
+.fc-button-active {
+    background: rgba(99,102,241,0.25) !important;
+
+    border-color: rgba(99,102,241,0.35) !important;
+}
+
+/*
+|--------------------------------------------------------------------------
+| CALENDAR WRAPPER
+|--------------------------------------------------------------------------
+*/
+
+.fc-scrollgrid {
+    border: 1px solid rgba(255,255,255,0.05) !important;
+
+    border-radius: 20px;
+
+    overflow: hidden;
+
+    background: #121211;
+
+    box-shadow: none !important;
+}
+
+.fc-theme-standard td,
+.fc-theme-standard th,
+.fc-theme-standard .fc-scrollgrid {
+    border-color: rgba(255,255,255,0.05);
+}
+
+.fc .fc-scrollgrid-section-header > * {
+    background: #1a1a18 !important;
+}
+
+/*
+|--------------------------------------------------------------------------
+| HEADER DAYS
+|--------------------------------------------------------------------------
+*/
+
+.fc-col-header-cell {
+    height: 46px !important;
+
+    background: #121211 !important;
+}
+
+.fc-col-header-cell-cushion {
+    color: rgba(255,255,255,0.45);
+
+    text-decoration: none !important;
+
+    font-size: 13px;
+
+    font-weight: 500;
+
+    padding-top: 12px !important;
+}
+
+/*
+|--------------------------------------------------------------------------
+| DAY CELLS
+|--------------------------------------------------------------------------
+*/
+
+.fc-daygrid-day {
+    background: #141314;
+}
+
+.fc-daygrid-day:hover {
+    background: rgba(255,255,255,0.02);
+}
+
+.fc-daygrid-day-frame {
+    min-height: 90px !important;
+}
+
+.fc-daygrid-day-number {
+    color: rgba(255,255,255,0.75);
+
+    font-size: 14px;
+
+    font-weight: 500;
+
+    padding: 5px !important;
+
+    text-decoration: none !important;
+}
+
+/*
+|--------------------------------------------------------------------------
+| TODAY
+|--------------------------------------------------------------------------
+*/
+
+.fc-day-today {
+    background: rgba(99,102,241,0.08) !important;
+}
+
+/*
+|--------------------------------------------------------------------------
+| EVENTS
+|--------------------------------------------------------------------------
+*/
+
+.fc-h-event {
+    border: none !important;
+
+    background: transparent !important;
+}
+
+.fc-daygrid-event {
+        width: 100% !important;
+
+    max-width: 100% !important;
+
+    overflow: hidden !important;
+}
+
+/*
+|--------------------------------------------------------------------------
+| CUSTOM EVENT
+|--------------------------------------------------------------------------
+*/
+
+/*
+|--------------------------------------------------------------------------
+| EVENT CARD
+|--------------------------------------------------------------------------
+*/
+
+.custom-event {
+    width: 100%;
+
+    box-sizing: border-box;
+
+    padding: 4px 8px;
+
+    min-width: 0;
+
+    overflow: hidden;
+
+    border-radius: 8px;
+
+    background:
+        linear-gradient(
+            135deg,
+            rgba(99,102,241,0.28),
+            rgba(139,92,246,0.18)
+        );
+
+    border: 1px solid rgba(255,255,255,0.04);
+
+    box-shadow: inset 0 1px rgba(255,255,255,0.03);
+}
+
+/*
+|--------------------------------------------------------------------------
+| TIME
+|--------------------------------------------------------------------------
+*/
+
+.custom-event-time {
+
+    font-size: 10px;
+    overflow: hidden;
+    font-weight: 500;
+
+    color: rgba(255,255,255,0.75);
+
+    line-height: 1;
+
+    margin-bottom: 4px;
+}
+
+/*
+|--------------------------------------------------------------------------
+| TITLE
+|--------------------------------------------------------------------------
+*/
+
+.custom-event-title {
+    font-size: 12px;
+    overflow: hidden;
+    font-weight: 600;
+
+    color: white;
+
+    line-height: 1.2;
+}
+
+/*
+|--------------------------------------------------------------------------
+| REMOVE UGLY OUTLINES
+|--------------------------------------------------------------------------
+*/
+
+.fc-theme-standard td:focus,
+.fc-theme-standard th:focus,
+.fc-button:focus {
+    outline: none !important;
+
+    box-shadow: none !important;
+}
+/*
+|--------------------------------------------------------------------------
+| REMOVE FULLCALENDAR SCROLLBAR
+|--------------------------------------------------------------------------
+*/
+
+.fc-scroller {
+    overflow: hidden !important;
+}
+
+.fc-scroller-liquid-absolute {
+    overflow: hidden !important;
+    
+}
+.fc-daygrid-event-harness {
+    min-width: 0;
+    overflow: hidden;
+    right: 0 !important;
+}
+.fc-event-main {
+    width: 100% !important;
+
+    max-width: 100% !important;
+
+    overflow: hidden !important;
+
+    min-width: 0 !important;
+}
+
+/* colors events based on source */
+.event-google .custom-event {
+
+    background:
+        linear-gradient(
+            135deg,
+            rgba(59,130,246,0.22) 0%,
+            rgba(37,99,235,0.14) 100%
+        );
+
+    border: 1px solid rgba(96,165,250,0.18);
+
+    box-shadow:
+        inset 0 1px rgba(255,255,255,0.04),
+        0 4px 12px rgba(37,99,235,0.10);
+
+    backdrop-filter: blur(10px);
+}
+
+.event-google .custom-event-time {
+
+    color: rgba(191,219,254,0.85);
+}
+
+.event-google .custom-event-title {
+
+    color: rgba(255,255,255,0.96);
+}
+
+
+/*
+|------------------------------------------------------------------
+| LOCAL EVENTS
+|------------------------------------------------------------------
+*/
+
+.event-local .custom-event {
+
+    background:
+        linear-gradient(
+            135deg,
+            rgba(139,92,246,0.24) 0%,
+            rgba(168,85,247,0.14) 100%
+        );
+
+    border: 1px solid rgba(196,181,253,0.14);
+
+    box-shadow:
+        inset 0 1px rgba(255,255,255,0.04),
+        0 4px 12px rgba(139,92,246,0.10);
+
+    backdrop-filter: blur(10px);
+}
+
+.event-local .custom-event-time {
+
+    color: rgba(221,214,254,0.82);
+}
+
+.event-local .custom-event-title {
+
+    color: rgba(255,255,255,0.96);
+}
+
+
+
+
+
+
