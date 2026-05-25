@@ -21,6 +21,7 @@ class EmailController extends Controller
         $user = Auth::user();
 
         $emails = $this->buildQuery($request, $user)
+            ->with(['event:email_id'])
             ->paginate(10);
 
         $statusCounts = Email::query()

@@ -8,9 +8,12 @@ import EventDrawer from '@/components/CalendarComponents/EventDrawer.vue'
 import Actions from '@/components/CalendarComponents/Actions.vue'
 import ReadyToSyncCard from '@/components/CalendarComponents/ReadyToSyncCard.vue'
 import CreateEventModal from '@/components/CalendarComponents/CreateEventModal.vue'
+import { useUiStore } from '@/stores/useUiStore'
 
 import { useCalendarStats } from '@/composables/useCalendarStats'
 
+
+const uiStore = useUiStore()
 /*
 |--------------------------------------------------------------------------
 | PROPS
@@ -58,6 +61,11 @@ const cards = useCalendarStats(props.stats)
 const showEventDrawer = ref(false)
 
 const selectedEvent = ref(null)
+const closeDrawer = () => {
+    showEventDrawer.value = false
+    
+    editingEvent.value = null
+}
 
 /*
 |--------------------------------------------------------------------------
@@ -74,22 +82,23 @@ const handleEventClick = (event) => {
 
 const showCreateModal = ref(false)
 const selectedDate = ref(null)
+// editing event for createEventModal
+const editingEvent = ref(null)
 
 const openCreateModal = (payload) => {
 
+    editingEvent.value = null
     selectedDate.value = payload.start_at
 
     showCreateModal.value = true
 }
 
-// editing event for createEventModal
-const editingEvent = ref(null)
+
 const handleEditEvent = (event) => {
 
     editingEvent.value = event
 
     showEventDrawer.value = false
-
     showCreateModal.value = true
 }
 
@@ -99,20 +108,22 @@ const closeModal = () => {
 
     editingEvent.value = null
 }
+
 </script>
 
 <template>
     <div
         class="
             min-h-screen
-            space-y-4
-            bg-[#0c0c0c]
+            bg-gray-50
+            dark:bg-[#0c0c0c]
             p-4
         "
     >
 
         <!-- STATS -->
-        <StatsCard :cards="cards" />
+        
+        <StatsCard v-if="uiStore.statsOpen" :cards="cards" />
 
         <!-- GRID -->
         <div
@@ -136,8 +147,10 @@ const closeModal = () => {
                 <div
                     class="
                         rounded-2xl
-                        border border-white/5
-                        bg-[#111111]
+                        border border-gray-200
+                        bg-white                 
+                        dark:border-white/5
+                        dark:bg-[#111111]
                         p-5
                     "
                 >
@@ -149,8 +162,8 @@ const closeModal = () => {
                               <div
                     class="
                         rounded-2xl
-                        border border-white/5
-                        bg-[#111111]
+                        dark:border-white/5
+                        dark:bg-[#111111]
                         p-5
                     "
                 >
@@ -177,7 +190,7 @@ const closeModal = () => {
         <EventDrawer
             :show="showEventDrawer"
             :event="selectedEvent"
-            @close="showEventDrawer = false"
+            @close="closeDrawer"
             @edit-event="handleEditEvent"
         />
 

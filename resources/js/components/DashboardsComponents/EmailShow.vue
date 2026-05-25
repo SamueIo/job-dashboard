@@ -1,7 +1,8 @@
 <script setup>
 import { getDate, getTime, getStatusColor } from '@/utils/useEmailHelpers'
-import { toRef } from 'vue'
+import { toRef, ref } from 'vue'
 import { useEmailSync } from '@/composables/useEmailSync'
+import CreateEventModal from '../CalendarComponents/CreateEventModal.vue'
 
 const props = defineProps({
     email: {
@@ -10,11 +11,45 @@ const props = defineProps({
     },
 })
 
+
+
 const emit = defineEmits(['closeEmail'])
 const { emailSeen } = useEmailSync()
+
+const showCreateEventModal = ref(false)
+const eventPrefill = ref(null)
+const scheduleFromEmail = () => {
+
+    eventPrefill.value = {
+
+        email_id: props.email.id,
+
+        title: props.email.subject,
+
+        description: props.email.summary,
+
+        start_at: props.email.detected_date,
+
+        end_at: props.email.detected_end_date,
+
+        type: props.status || 'meeting',
+    }
+
+    showCreateEventModal.value = true
+}
+
 emailSeen(
     toRef(props, 'email')
 )
+
+const getSenderName = (from) => {
+
+    const match = from.match(/"?([^"<]+)"?\s*</)
+
+    return match
+        ? match[1].trim()
+        : from
+}
 </script>
 
 <template>
@@ -29,10 +64,7 @@ emailSeen(
         <div
             class="
                 border-b border-black/5
-                p-6
-
-                dark:border-white/5
-            "
+                p-6 dark:border-white/5 "
         >
 
             <div class="flex items-start justify-between">
@@ -83,7 +115,7 @@ emailSeen(
 
                         <!-- STATUS -->
                         <div class="mt-4 flex items-center gap-3">
-
+                            
                             <div
                                 class="rounded-full px-3 py-1 text-xs font-semibold uppercase tracking-wide"
                                 :class="getStatusColor(email.status)"
@@ -102,6 +134,35 @@ emailSeen(
                                 {{ Math.round((email.confidence || 0) * 100) }}% confidence
                             </div>
 
+                            <button
+                                @click="scheduleFromEmail"
+                                    :class="[
+                                    'inline-flex  items-center gap-2 rounded-xl border px-4 py-2 text-sm font-medium shadow-sm transition-all duration-200',
+                                        props.email.event
+                                            ? ''
+                                            : 'bg-white text-slate-700 border-slate-200 hover:bg-indigo-50 hover:text-indigo-600 hover:border-indigo-300',
+
+                                        'dark:border-slate-700 dark:text-slate-200',
+                                        !props.email.event ?  'dark:bg-slate-800 dark:hover:bg-indigo-500/10 dark:hover:text-indigo-300' : ''
+                                    ]"
+                                >
+                                    <svg
+                                        xmlns="http://www.w3.org/2000/svg"
+                                        class="h-4 w-4"
+                                        fill="none"
+                                        viewBox="0 0 24 24"
+                                        stroke="currentColor"
+                                        stroke-width="2"
+                                    >
+                                        <path
+                                            stroke-linecap="round"
+                                            stroke-linejoin="round"
+                                            d="M8 7V3m8 4V3m-9 8h10m-13 9h16a2 2 0 002-2V7a2 2 0 00-2-2H4a2 2 0 00-2 2v11a2 2 0 002 2z"
+                                        />
+                                    </svg>
+
+                                    {{ props.email.event ? 'Already scheduled' : 'Schedule' }}
+                            </button>
                         </div>
 
                     </div>
@@ -133,7 +194,7 @@ emailSeen(
                                 dark:text-gray-500
                             "
                         >
-                            To: {{ email.from }}
+                            From: {{ getSenderName(email.from) }}
                         </div>
 
                     </div>
@@ -301,7 +362,6 @@ emailSeen(
                         <span class="text-gray-500">
                             Confidence
                         </span>
-
                         <span
                             class="
                                 text-gray-900
@@ -534,5 +594,12 @@ emailSeen(
     >
         Select an email
     </div>
+
+    <CreateEventModal
+        :show="showCreateEventModal"
+        :prefill="eventPrefill"
+        :event="props.email.event ? props.email.event : ''"
+        @close="showCreateEventModal = false"
+    />
 
 </template>

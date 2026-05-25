@@ -6,8 +6,10 @@ import StatsGrid from '@/components/DashboardsComponents/StatsGrid.vue'
 import EmailList from '@/components/EmailComponents/EmailList.vue'
 import EmailShow from '@/components/DashboardsComponents/EmailShow.vue'
 import EmailFilters from '@/components/EmailComponents/EmailFilters.vue'
+import { useUiStore } from '@/stores/useUiStore'
 
 const selectedEmail = ref(null)
+const uiStore = useUiStore()
 
 defineOptions({
     layout: {
@@ -57,10 +59,11 @@ watch(
 
 <template>
     <Head title="Emails" />
-    <div class="pt-4 px-6 gap-2 ">
+    <div v-if="uiStore.statsOpen" class="pt-4 px-4 gap-2 ">
         <StatsGrid />
     </div>
-    <div class="flex flex-col h-screen overflow-hidden gap-2 p-4 pt-0 ">
+ 
+    <div class="flex flex-col h-screen overflow-hidden gap-2 p-2 pt-0 ">
 
 
         <EmailFilters
@@ -71,7 +74,7 @@ watch(
         />
 
         <!-- CONTENT -->
-        <div class="flex flex-1 min-h-0 gap-4 overflow-hidden">
+        <div class="flex flex-1 min-h-0 gap-4 p-2 overflow-hidden">
 
             <!-- EMAIL LIST -->
             <div

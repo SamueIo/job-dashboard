@@ -1,9 +1,15 @@
 .fc {
+    --fc-border-color: rgba(229,231,235,1);
+
+    color: #111827;
+
+    font-family: Inter, sans-serif;
+}
+
+.dark .fc {
     --fc-border-color: rgba(255,255,255,0.05);
 
     color: white;
-
-    font-family: Inter, sans-serif;
 }
 
 /*
@@ -25,9 +31,13 @@
 
     font-weight: 700 !important;
 
-    color: #fff;
+    color: #111827;
 
     letter-spacing: -0.03em;
+}
+
+.dark .fc-toolbar-title {
+    color: #fff;
 }
 
 /*
@@ -43,11 +53,11 @@
 
     border-radius: 12px !important;
 
-    border: 1px solid rgba(255,255,255,0.06) !important;
+    border: 1px solid #E5E7EB !important;
 
-    background: rgba(255,255,255,0.03) !important;
+    background: white !important;
 
-    color: white !important;
+    color: #111827 !important;
 
     font-weight: 500 !important;
 
@@ -56,6 +66,13 @@
     box-shadow: none !important;
 
     transition: .2s ease !important;
+}
+.dark .fc-button {
+    border: 1px solid rgba(255,255,255,0.06) !important;
+
+    background: rgba(255,255,255,0.03) !important;
+
+    color: white !important;
 }
 
 .fc-button:hover {
@@ -81,9 +98,12 @@
 
     overflow: hidden;
 
-    background: #121211;
+    background: white;
 
     box-shadow: none !important;
+}
+.dark .fc-scrollgrid {
+    background: #121211;
 }
 
 .fc-theme-standard td,
@@ -105,11 +125,13 @@
 .fc-col-header-cell {
     height: 46px !important;
 
+    background: white !important;
+}
+.dark .fc-col-header-cell {
     background: #121211 !important;
 }
-
 .fc-col-header-cell-cushion {
-    color: rgba(255,255,255,0.45);
+    color: #6B7280;
 
     text-decoration: none !important;
 
@@ -120,6 +142,10 @@
     padding-top: 12px !important;
 }
 
+.dark .fc-col-header-cell-cushion {
+    color: rgba(255,255,255,0.45);
+}
+
 /*
 |--------------------------------------------------------------------------
 | DAY CELLS
@@ -127,6 +153,10 @@
 */
 
 .fc-daygrid-day {
+    background: white;
+}
+
+.dark .fc-daygrid-day {
     background: #141314;
 }
 
@@ -139,7 +169,7 @@
 }
 
 .fc-daygrid-day-number {
-    color: rgba(255,255,255,0.75);
+    color: #374151;
 
     font-size: 14px;
 
@@ -148,6 +178,9 @@
     padding: 5px !important;
 
     text-decoration: none !important;
+}
+.dark .fc-daygrid-day-number {
+    color: rgba(255,255,255,0.75);
 }
 
 /*

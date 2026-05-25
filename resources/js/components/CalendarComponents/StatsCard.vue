@@ -6,33 +6,32 @@ const props = defineProps({
     },
 })
 
-
 const styles = {
     indigo: {
-        glow: 'bg-indigo-500/10',
-        icon: 'from-indigo-500/30 to-violet-500/10',
-        iconColor: 'text-indigo-300',
+        glow: 'bg-indigo-500/20 dark:bg-indigo-500/10',
+        icon: 'from-indigo-500/20 to-violet-500/20 dark:from-indigo-500/30 dark:to-violet-500/10',
+        iconColor: 'text-indigo-600 dark:text-indigo-300',
         stroke: '#8B5CF6',
     },
 
     blue: {
-        glow: 'bg-blue-500/10',
-        icon: 'from-blue-500/30 to-cyan-500/10',
-        iconColor: 'text-blue-300',
+        glow: 'bg-blue-500/20 dark:bg-blue-500/10',
+        icon: 'from-blue-500/20 to-cyan-500/20 dark:from-blue-500/30 dark:to-cyan-500/10',
+        iconColor: 'text-blue-600 dark:text-blue-300',
         stroke: '#3B82F6',
     },
 
     emerald: {
-        glow: 'bg-emerald-500/10',
-        icon: 'from-emerald-500/30 to-green-500/10',
-        iconColor: 'text-emerald-300',
+        glow: 'bg-emerald-500/20 dark:bg-emerald-500/10',
+        icon: 'from-emerald-500/20 to-green-500/20 dark:from-emerald-500/30 dark:to-green-500/10',
+        iconColor: 'text-emerald-600 dark:text-emerald-300',
         stroke: '#22C55E',
     },
 
     fuchsia: {
-        glow: 'bg-fuchsia-500/10',
-        icon: 'from-fuchsia-500/30 to-pink-500/10',
-        iconColor: 'text-fuchsia-300',
+        glow: 'bg-fuchsia-500/20 dark:bg-fuchsia-500/10',
+        icon: 'from-fuchsia-500/20 to-pink-500/20 dark:from-fuchsia-500/30 dark:to-pink-500/10',
+        iconColor: 'text-fuchsia-600 dark:text-fuchsia-300',
         stroke: '#D946EF',
     },
 }
@@ -49,8 +48,8 @@ const styles = {
 
                 rounded-[18px]
 
-                border border-black/5
-                bg-white/60
+                border border-gray-200
+                bg-white
 
                 p-3
 
@@ -100,7 +99,7 @@ const styles = {
                             class="
                                 text-sm
 
-                                text-gray-500
+                                text-gray-600
                                 dark:text-gray-400
                             "
                         >
@@ -120,31 +119,31 @@ const styles = {
                         >
                             {{ card.value }}
                         </div>
+
                         <div
                             v-if="card.subtitle"
-                                class="
-                                    mt-1
-                                    text-sm
+                            class="
+                                mt-1
+                                text-sm
 
-                                    text-gray-500
-                                    dark:text-gray-400
-                                "
-                            >
+                                text-gray-500
+                                dark:text-gray-400
+                            "
+                        >
                             {{ card.subtitle }}
                         </div>
                     </div>
-      
 
                 </div>
-                    
+
                 <!-- BOTTOM -->
-                <div class="mt-auto flex items-end justify-between ">
+                <div class="mt-auto flex items-end justify-between">
 
                     <div
                         class="
                             text-sm
 
-                            text-emerald-500
+                            text-emerald-600
                             dark:text-emerald-400
                         "
                     >

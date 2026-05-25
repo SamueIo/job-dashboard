@@ -4,7 +4,7 @@ const props = defineProps({
     show: Boolean,
     event: Object,
 })
-console.log('props.evetn', props.event );
+
 
 const emit = defineEmits([
     'close',
@@ -19,6 +19,7 @@ const hideEvent = () => {
 
         onSuccess: () => {
             emit('close')
+            
         }
     })
 }

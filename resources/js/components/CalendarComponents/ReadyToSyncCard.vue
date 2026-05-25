@@ -58,14 +58,7 @@ const formatDate = (date) => {
                 >
                     Ready to sync with google
                 </p>
-                    <div v-if="events.length">
-                        <button class="rounded-xl border border-white/10 bg-white/3
-                            px-3 py-2 text-xs font-medium text-white transition
-                            hover:bg-white/6"
-                            @click="syncAll">
-                            Sync all
-                        </button>
-                    </div>
+                    
                 <p
                     class="
                         mt-1

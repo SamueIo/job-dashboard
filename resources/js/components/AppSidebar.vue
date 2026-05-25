@@ -20,6 +20,7 @@ import { calendar } from '@/routes';
 import type { NavItem } from '@/types';
 import { Mail, Calendar } from 'lucide-vue-next'
 import EnableSyncCalendar from './CalendarComponents/EnableSyncCalendar.vue';
+import HideGridStatsButton from './CalendarComponents/HideGridStatsButton.vue';
 import { usePage } from '@inertiajs/vue3'
 
 const page = usePage()
@@ -64,15 +65,19 @@ const footerNavItems: NavItem[] = [
         </SidebarHeader>
 
         <SidebarContent>
+            
             <NavMain :items="mainNavItems" />
         </SidebarContent>
+        
         <SidebarFooter>
             <EnableSyncCalendar
                 v-if="page.url.startsWith('/calendar')"
             />
+            <HideGridStatsButton v-if="!page.url.startsWith('/dashboard')"/>
             <NavFooter :items="footerNavItems" />
             <NavUser />
         </SidebarFooter>
+        
     </Sidebar>
     <slot />
 </template>

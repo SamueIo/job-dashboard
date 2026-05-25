@@ -176,6 +176,8 @@ class CalendarController extends Controller
 
             'user_id' => auth()->id(),
 
+            'email_id' => $request->email_id ?? null,
+
             'title' => $request->title,
 
             'company' => $request->company,

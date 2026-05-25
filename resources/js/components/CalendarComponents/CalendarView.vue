@@ -202,7 +202,7 @@ const calendarOptions = computed(() => ({
             rounded-3xl
             border border-white/5
             bg-[#131314]
-            p-4
+            p-4 h-172
         "
     >
 

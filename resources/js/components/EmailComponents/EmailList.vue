@@ -60,13 +60,23 @@ const { loadMoreMails } = useEmailSync();
                     />
                 </div>
                  <!-- COMPANY -->
-                <div class="truncate text-lg font-semibold black:text-white">
-                    {{ email.company || getSenderName(email.from) }}
-                </div>
+            <div
+                :class="email.seen
+                    ? 'text-gray-500 dark:text-gray-400'
+                    : 'text-gray-900 dark:text-gray-100'"
+                class="
+                    truncate
+                    text-lg
+                    font-semibold
+                    tracking-tight
+                "
+            >
+                {{ email.company || getSenderName(email.from) }}
+            </div>
         </div>
 
     </div>
-    <div v-else class=" rounded-2xl">
+    <div v-else class=" rounded-2xl pt-0.5">
 
         <div
             v-for="email in emails" :key="email.id + email.status"
@@ -104,30 +114,50 @@ const { loadMoreMails } = useEmailSync();
 
                 <!-- CONTENT -->
                 <div class="min-w-0 flex-1">
-
+                
                     <!-- COMPANY -->
-                    <div
-                        class="
-                            truncate
-                            text-lg
-                            font-semibold
-                            tracking-tight
-                            text-black/70 dark:text-white/90
-                        "
-                    >
-                        {{ email.company || '(No company)' }}
-                    </div>
+    <div
+        :class="email.seen
+            ? 'text-gray-500 dark:text-gray-400'
+            : 'text-gray-900 dark:text-gray-100'"
+        class="
+            truncate
+            text-lg
+            font-semibold
+            tracking-tight
+        "
+    >
+        {{ email.company || '(No company)' }}
+    </div>
 
-                    <!-- SUBJECT -->
-                    <div class="truncate text-sm font-medium text-gray-400 black:text-grey-300">
-                        {{ email.role || email.subject }}
-                    </div>
+    <!-- SUBJECT -->
+    <div
+        :class="email.seen
+            ? 'text-gray-400 dark:text-gray-500'
+            : 'text-gray-600 dark:text-gray-300'"
+        class="
+            truncate
+            text-sm
+            font-medium
+        "
+    >
+        {{ email.role || email.subject }}
+    </div>
 
-                    <!-- SUMMARY -->
-                    <div class="mt-1 truncate text-sm text-gray-600 black:text-grey-500">
-                        {{ email.summary || email.snippet }}
+    <!-- SUMMARY -->
+    <div
+        :class="email.seen
+            ? 'text-gray-400/80 dark:text-gray-500'
+            : 'text-gray-500 dark:text-gray-400'"
+        class="
+            mt-1
+            truncate
+            text-sm
+        "
+    >
+        {{ email.summary || email.snippet }}
                     </div>
-
+                
                 </div>
             </div>
 

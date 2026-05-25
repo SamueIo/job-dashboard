@@ -32,4 +32,8 @@ class Email extends Model
         'seen' => 'boolean',
         'confidence' => 'float',
 ];
+    public function event()
+    {
+        return $this->hasOne(Event::class);
+    }
 }

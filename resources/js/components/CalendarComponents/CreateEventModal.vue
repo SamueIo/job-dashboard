@@ -7,11 +7,19 @@ const props = defineProps({
     show: Boolean,
     selectedDate: String,
     event: Object,
+    prefill: Object,
 })
 
 const emit = defineEmits([
     'close',
 ])
+
+const closeModal = () => {
+
+    resetForm()
+
+    emit('close')
+}
 
 /*
 |--------------------------------------------------------------------------
@@ -20,6 +28,8 @@ const emit = defineEmits([
 */
 
 const form = useForm({
+
+    email_id: '',
 
     title: '',
 
@@ -34,6 +44,18 @@ const form = useForm({
     sync_to_google: false,
 })
 
+const resetForm = () => {
+
+    form.reset()
+
+    form.email_id = ''
+    form.title = ''
+    form.description = ''
+    form.start_at = ''
+    form.end_at = ''
+    form.type = ''
+}
+
 /*
 |--------------------------------------------------------------------------
 | SUBMIT
@@ -46,8 +68,9 @@ const submit = () => {
         form.put(`/calendar/events/${props.event.id}`, {
 
             onSuccess: () => {
-
-                emit('close')
+                resetForm()
+                closeModal()
+                
             },
         })
     }
@@ -57,8 +80,8 @@ const submit = () => {
         form.post('/calendar/events', {
 
             onSuccess: () => {
-
-                emit('close')
+                resetForm()
+                closeModal()
             },
         })
     }
@@ -128,6 +151,28 @@ watch(
 
         form.type = event.type || ''
     },
+    {
+        immediate: true,
+    }
+)
+
+watch(
+    () => props.prefill,
+
+    (prefill) => {
+
+        if (!prefill) {
+            return
+        }
+
+        form.email_id = prefill.email_id ||''
+        form.title = prefill.title || ''
+        form.description = prefill.description || ''
+        form.start_at = prefill.start_at || ''
+        form.end_at = prefill.end_at || ''
+        form.type = prefill.type || 'meeting'
+    },
+
     {
         immediate: true,
     }
@@ -209,13 +254,13 @@ watch(
                                 text-white
                             "
                         >
-                            Create Event
+                            {{ isEditing ? 'Update Event' : 'Create Event' }}
                         </h2>
 
                     </div>
 
                     <button
-                        @click="emit('close')"
+                        @click="closeModal"
                         class="
                             rounded-xl
 
@@ -366,7 +411,7 @@ watch(
                             <input
                                 v-model="form.start_at"
                                 type="datetime-local"
-
+                                required
                                 class="
                                     w-full
 
@@ -538,7 +583,7 @@ watch(
                         <button
                             type="button"
 
-                            @click="emit('close')"
+                            @click="closeModal"
 
                             class="
                                 rounded-2xl
