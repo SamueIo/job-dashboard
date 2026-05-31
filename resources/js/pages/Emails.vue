@@ -63,7 +63,7 @@ watch(
         <StatsGrid />
     </div>
  
-    <div class="flex flex-col h-screen overflow-hidden gap-2 p-2 pt-0 ">
+    <div class="flex flex-col h-screen overflow-hidden  p-2 pt-0 ">
 
 
         <EmailFilters
@@ -74,7 +74,7 @@ watch(
         />
 
         <!-- CONTENT -->
-        <div class="flex flex-1 min-h-0 gap-4 p-2 overflow-hidden">
+        <div class="flex flex-1 min-h-0 gap-4 px-2 overflow-hidden">
 
             <!-- EMAIL LIST -->
             <div

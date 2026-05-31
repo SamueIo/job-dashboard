@@ -44,30 +44,16 @@ const colors = {
 </script>
 
 <template>
-
     <div>
 
         <!-- HEADER -->
         <div class="mb-5 flex items-center justify-between">
 
-            <h2
-                class="
-                    text-lg
-                    font-semibold
-                    text-white
-                "
-            >
+            <h2 class="text-lg font-semibold text-gray-900 dark:text-white">
                 Upcoming Interviews
             </h2>
 
-            <button
-                class="
-                    text-sm
-                    text-blue-400
-
-                    hover:text-blue-300
-                "
-            >
+            <button class="text-sm text-blue-500 hover:text-blue-400">
                 View all
             </button>
 
@@ -75,115 +61,93 @@ const colors = {
 
         <!-- LIST -->
         <div class="space-y-3">
-                <div v-if="!upcomingInterviews?.length">
-                    <p>No upcoming interviews</p>
-                </div >
-            <div v-else
-                v-for="interview in upcomingInterviews"
-                :key="interview.id"
-                class="
-                    flex items-center gap-3
 
-                    rounded-2xl
-
-                    border border-white/5
-
-                    bg-white/[0.02]
-
-                    px-3 py-3
-
-                    transition-all duration-200
-
-                    hover:bg-white/[0.04]
-                "
+            <!-- EMPTY -->
+            <div
+                v-if="!upcomingInterviews?.length"
+                class="rounded-2xl border border-gray-200 bg-gray-50 px-4 py-6 text-center dark:border-white/5 dark:bg-white/[0.02]"
             >
+                <p class="text-sm text-gray-500 dark:text-white/50">
+                    No upcoming interviews
+                </p>
+            </div>
 
-                <!-- ICON -->
+            <!-- INTERVIEWS -->
+            <template v-else>
+
                 <div
-                    :class="[
-                        'flex h-11 w-11 items-center justify-center rounded-xl',
-                        colors[interview.company]?.bg,
-                    ]"
+                    v-for="interview in upcomingInterviews"
+                    :key="interview.id"
+
+                    class="
+                        flex items-center gap-3
+                        rounded-2xl
+                        border border-gray-200
+                        bg-white
+                        px-3 py-3
+                        transition-all duration-200
+                        hover:bg-gray-50
+                        dark:border-white/5
+                        dark:bg-white/[0.02]
+                        dark:hover:bg-white/[0.04]
+                    "
                 >
 
-                    <Calendar
-                        :class="[
-                            'h-5 w-5',
-                            colors[interview.company]?.icon,
-                        ]"
-                    />
-
-                </div>
-
-                <!-- CONTENT -->
-                <div class="min-w-0 flex-1">
-
-                    <div
-                        class="
-                            mb-1
-
-                            text-xs
-
-                            text-white/50
-                        "
-                    >
-                        {{ new Date(interview.start_at).toLocaleString() }}
-                    </div>
-
-                    <div
-                        class="
-                            truncate
-
-                            text-sm
-                            font-semibold
-
-                            text-white
-                        "
-                    >
-                        {{ interview.company || interview.title }}
-                    </div>
-
-                    <div
-                        class="
-                            truncate
-
-                            text-xs
-
-                            text-white/55
-                        "
-                    >
-                        {{ interview.position }}
-                    </div>
-
-                </div>
-
-                <!-- RIGHT -->
-                <div class="flex items-center gap-3">
-
-                    <!-- BADGE -->
+                    <!-- ICON -->
                     <div
                         :class="[
-                            'rounded-full px-3 py-1 text-[11px] font-semibold tracking-wide',
-                            colors[interview.company]?.badge,
+                            'flex h-11 w-11 items-center justify-center rounded-xl',
+                            colors[interview.company]?.bg,
                         ]"
                     >
-                        INTERVIEW
+
+                        <Calendar
+                            :class="[
+                                'h-5 w-5',
+                                colors[interview.company]?.icon,
+                            ]"
+                        />
+
                     </div>
 
-                    <!-- DOT -->
-                    <div
-                        class="
-                            h-2 w-2
+                    <!-- CONTENT -->
+                    <div class="min-w-0 flex-1">
 
-                            rounded-full
+                        <div class="mb-1 text-xs text-gray-500 dark:text-white/50">
+                            {{ new Date(interview.start_at).toLocaleString() }}
+                        </div>
 
-                            bg-blue-500
-                        "
-                    />
+                        <div class="truncate text-sm font-semibold text-gray-900 dark:text-white">
+                            {{ interview.company || interview.title }}
+                        </div>
+
+                        <div class="truncate text-xs text-gray-500 dark:text-white/55">
+                            {{ interview.position }}
+                        </div>
+
+                    </div>
+
+                    <!-- RIGHT -->
+                    <div class="flex items-center gap-3">
+
+                        <!-- BADGE -->
+                        <div
+                            :class="[
+                                'rounded-full px-3 py-1 text-[11px] font-semibold tracking-wide',
+                                colors[interview.company]?.badge,
+                            ]"
+                        >
+                            INTERVIEW
+                        </div>
+
+                        <!-- DOT -->
+                        <div class="h-2 w-2 rounded-full bg-blue-500" />
+
+                    </div>
 
                 </div>
 
-            </div>
+            </template>
 
         </div>
 

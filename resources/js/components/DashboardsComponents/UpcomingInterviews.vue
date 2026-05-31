@@ -2,7 +2,7 @@
 defineProps({
     upcomingInterviews: {
         type: Array,
-        default: () => []
+        default: () => [],
     },
 })
 
@@ -36,62 +36,134 @@ const getCompanyInitial = (company) => {
 
 <template>
     <div
-        class="rounded-3xl  p-6 shadow-[0_0_40px_rgba(0,0,0,0.25)]"
+        class="
+            rounded-2xl
+            border border-gray-200
+            bg-white
+            p-6
+            shadow-sm
+            dark:border-white/5
+            dark:bg-[#0a0a0a]
+            h-full
+        "
     >
+
         <!-- HEADER -->
         <div class="mb-6 flex items-center justify-between">
+
             <div class="flex items-center gap-2">
+
                 <div
-                    class="flex h-8 w-8 items-center justify-center rounded-lg bg-indigo-500/10 text-indigo-400"
+                    class="
+                        flex h-8 w-8 items-center justify-center
+                        rounded-lg
+                        bg-indigo-100 text-indigo-600
+                        dark:bg-indigo-500/10
+                        dark:text-indigo-400
+                    "
                 >
                     📅
                 </div>
 
-                <h2 class="text-lg font-semibold text-white">
+                <h2 class="text-lg font-semibold text-gray-900 dark:text-white">
                     Upcoming Interviews
                 </h2>
+
             </div>
 
             <button
-                class="text-sm font-medium text-indigo-400 transition hover:text-indigo-300"
+                class="
+                    text-sm font-medium
+                    text-indigo-500
+                    transition
+                    hover:text-indigo-400
+                "
             >
                 View all
             </button>
+
+        </div>
+
+        <!-- EMPTY -->
+        <div
+            v-if="!upcomingInterviews.length"
+
+            class="
+                px-4 py-6
+                text-center
+                
+            "
+        >
+            <p class="text-sm text-gray-500 dark:text-white/50">
+                No upcoming interviews
+            </p>
         </div>
 
         <!-- LIST -->
-        <div class="space-y-2">
+        <div
+            v-else
+            class="space-y-2"
+        >
+
             <div
                 v-for="interview in upcomingInterviews"
                 :key="interview.id"
+
                 @click="emit('select', interview)"
-                class="group flex cursor-pointer items-center justify-between rounded-2xl border border-transparent px-3 py-4 transition hover:border-white/10 hover:bg-white/3"
+
+                class="
+                    group flex cursor-pointer items-center justify-between
+                    rounded-2xl
+                    border border-gray-200
+                    bg-white
+                    px-3 py-4
+                    shadow-sm
+                    transition-all duration-200
+                    hover:bg-gray-50
+                    dark:border-white/5
+                    dark:bg-white/[0.02]
+                    dark:hover:bg-white/[0.04]
+                "
             >
+
                 <!-- LEFT -->
                 <div class="flex items-center gap-4">
+
                     <!-- COMPANY ICON -->
                     <div
-                        class="flex h-12 w-12 items-center justify-center rounded-full bg-white/5 text-sm font-semibold text-white"
+                        class="
+                            flex h-12 w-12 items-center justify-center
+                            rounded-full
+                            bg-gray-100
+                            text-sm font-semibold text-gray-700
+                            dark:bg-white/5
+                            dark:text-white
+                        "
                     >
                         {{ getCompanyInitial(interview.company) }}
                     </div>
 
                     <!-- INFO -->
                     <div>
-                        <div class="text-sm font-semibold text-white">
+
+                        <div class="text-sm font-semibold text-gray-900 dark:text-white">
                             {{ interview.company || 'Unknown company' }}
                         </div>
 
-                        <div class="text-sm text-gray-400">
+                        <div class="text-sm text-gray-500 dark:text-gray-400">
                             {{ interview.role || 'Unknown role' }}
                         </div>
+
                     </div>
+
                 </div>
 
                 <!-- RIGHT -->
                 <div class="flex items-center gap-8">
+
                     <!-- DATE -->
-                    <div class="hidden text-sm text-gray-400 md:block">
+                    <div class="hidden text-sm text-gray-500 dark:text-gray-400 md:block">
+
                         <div class="flex items-center gap-2">
                             <span>🗓</span>
 
@@ -100,15 +172,14 @@ const getCompanyInitial = (company) => {
                             </span>
                         </div>
 
-                        <div class="mt-1 text-xs text-gray-500">
+                        <div class="mt-1 text-xs text-gray-400 dark:text-gray-500">
                             {{ formatTime(interview.interview_at) }}
                         </div>
+
                     </div>
 
                     <!-- MEETING TYPE -->
-                    <div
-                        class="hidden min-w-30 text-sm text-gray-400 lg:block"
-                    >
+                    <div class="hidden min-w-30 text-sm text-gray-500 dark:text-gray-400 lg:block">
                         {{
                             interview.meeting_link
                                 ? 'Google Meet'
@@ -118,14 +189,24 @@ const getCompanyInitial = (company) => {
 
                     <!-- STATUS -->
                     <div
-                        class="rounded-full bg-green-500 px-3 py-1 text-xs font-medium text-white/80"
+                        class="
+                            rounded-full
+                            bg-green-100
+                            px-3 py-1
+                            text-xs font-medium
+                            text-green-700
+                            dark:bg-green-500/20
+                            dark:text-green-300
+                        "
                     >
                         Interview
                     </div>
-                </div>
-            </div>
-        </div>
 
+                </div>
+
+            </div>
+
+        </div>
 
     </div>
 </template>

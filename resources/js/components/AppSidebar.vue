@@ -1,8 +1,7 @@
 <script setup lang="ts">
 import { Link } from '@inertiajs/vue3';
-import {  LayoutGrid } from 'lucide-vue-next';
+import { BarChart3Icon, LayoutGrid } from 'lucide-vue-next';
 import AppLogo from '@/components/AppLogo.vue';
-import NavFooter from '@/components/NavFooter.vue';
 import NavMain from '@/components/NavMain.vue';
 import NavUser from '@/components/NavUser.vue';
 import {
@@ -18,11 +17,13 @@ import { dashboard } from '@/routes';
 import { index as emails } from '@/routes/emails';
 import { calendar } from '@/routes';
 import type { NavItem } from '@/types';
-import { Mail, Calendar } from 'lucide-vue-next'
+import { Mail, Calendar,  } from 'lucide-vue-next'
 import EnableSyncCalendar from './CalendarComponents/EnableSyncCalendar.vue';
 import HideGridStatsButton from './CalendarComponents/HideGridStatsButton.vue';
-import { usePage } from '@inertiajs/vue3'
-
+import { usePage } from '@inertiajs/vue3';
+import type { SidebarActionItem } from '@/types/sidebar';
+import SidebarActions from './SidebarActions.vue';
+import { computed } from 'vue';
 const page = usePage()
 
 const mainNavItems: NavItem[] = [
@@ -45,9 +46,28 @@ const mainNavItems: NavItem[] = [
     },
 ];
 
-const footerNavItems: NavItem[] = [
+const isCalendarPage = computed(() =>
+    page.url.startsWith('/calendar')
+)
 
-];
+const isNotDashboard = computed(() =>
+    !page.url.startsWith('/dashboard')
+)
+
+const footerActionItems: SidebarActionItem[] = [
+    {
+        title: 'Google Calendar Sync',
+        icon: Calendar,
+        component: EnableSyncCalendar,
+        show: isCalendarPage,
+    },
+    {
+        title: 'Hide Grid Stats',
+        icon: BarChart3Icon,
+        component: HideGridStatsButton,
+        show: isNotDashboard,
+    },
+]
 </script>
 
 <template>
@@ -68,13 +88,10 @@ const footerNavItems: NavItem[] = [
             
             <NavMain :items="mainNavItems" />
         </SidebarContent>
-        
+
         <SidebarFooter>
-            <EnableSyncCalendar
-                v-if="page.url.startsWith('/calendar')"
-            />
-            <HideGridStatsButton v-if="!page.url.startsWith('/dashboard')"/>
-            <NavFooter :items="footerNavItems" />
+            <SidebarActions :items="footerActionItems" />
+
             <NavUser />
         </SidebarFooter>
         

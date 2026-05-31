@@ -127,10 +127,10 @@ const closeModal = () => {
 
         <!-- GRID -->
         <div
-            class="
-                grid grid-cols-1 gap-8
-                xl:grid-cols-[1fr_320px]
-            "
+            :class="[
+                uiStore.statsOpen ? 'mt-6' : 'mt-0',
+                'grid grid-cols-1 gap-8 xl:grid-cols-[1fr_320px]'
+            ]"
         >
 
             <!-- CALENDAR -->

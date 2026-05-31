@@ -47,6 +47,21 @@ const getStatusBg = (status) => {
             </button>
         </div>
 
+                <!-- EMPTY -->
+        <div
+            v-if="!recentActivity.length"
+
+            class="
+                px-4 py-6
+                text-center
+                
+            "
+        >
+            <p class="text-sm text-gray-500 dark:text-white/50">
+                No recent activity yet
+            </p>
+        </div>
+
         <!-- LIST -->
         <div class="space-y-5">
             <div
